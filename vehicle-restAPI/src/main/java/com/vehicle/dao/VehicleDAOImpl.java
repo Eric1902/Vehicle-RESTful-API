@@ -12,12 +12,12 @@ import com.vehicle.model.Vehicle;
  */
 public class VehicleDAOImpl implements VehicleDAO {
 
-	private Map<Integer, Vehicle> vehicleDirectory = new ConcurrentHashMap<>();
+	private Map<Integer, Vehicle> directory = new ConcurrentHashMap<>();
 
 	private VehicleDAOImpl() {
-		vehicleDirectory.put(1, new Vehicle(1, 2017, "Honda", "Accord"));
-		vehicleDirectory.put(2, new Vehicle(2, 2010, "Toyota", "Camry"));
-		vehicleDirectory.put(3, new Vehicle(3, 2015, "Tesla", "Speedster"));
+		directory.put(1, new Vehicle(1, 2017, "Honda", "Accord"));
+		directory.put(2, new Vehicle(2, 2010, "Toyota", "Camry"));
+		directory.put(3, new Vehicle(3, 2015, "Tesla", "Speedster"));
 	}
 
 	private static VehicleDAOImpl instance = new VehicleDAOImpl();
@@ -28,30 +28,40 @@ public class VehicleDAOImpl implements VehicleDAO {
 
 	@Override
 	public Collection<Vehicle> getAllVehicles() {
-		return vehicleDirectory.values();
+		return directory.values();
 	}
 
 	@Override
 	public Vehicle getVehicleById(int id) {
-		if (vehicleDirectory.containsKey(id))
-			return vehicleDirectory.get(id);
+		if (directory.containsKey(id))
+			return directory.get(id);
 		return null;
 	}
 
 	@Override
-	public void addVehicle(Vehicle vehicle) {
-		vehicleDirectory.put(vehicle.getId(), vehicle);
+	public void addVehicle(Vehicle vehicle) throws Exception {
+		if(isValid(vehicle))
+			directory.put(vehicle.getId(), vehicle);
+		else
+			throw new Exception("Invalid vehicle parameters!");
 	}
 
 	@Override
 	public void updateVehicle(Vehicle vehicle) {
-		addVehicle(vehicle);
+		if(directory.containsKey(vehicle.getId()))
+			directory.put(vehicle.getId(), vehicle);
 	}
 
 	@Override
 	public void deleteVehicle(int id) {
-		if (vehicleDirectory.containsKey(id))
-			vehicleDirectory.remove(id);
+		if (directory.containsKey(id))
+			directory.remove(id);
+	}
+	
+	private boolean isValid(Vehicle vehicle){
+		if(vehicle.getMake()!=null && vehicle.getMake().length()>0 && vehicle.getModel()!=null && vehicle.getModel().length()>0 && 1950<=vehicle.getYear() && vehicle.getYear()<=2050)
+			return true;
+		return false;
 	}
 
 }

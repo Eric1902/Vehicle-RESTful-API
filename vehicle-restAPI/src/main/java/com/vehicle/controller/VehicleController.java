@@ -35,13 +35,13 @@ public class VehicleController {
 	}
 
 	@PostMapping
-	public void addVehicle(@RequestBody Vehicle vehicle) {
+	public void addVehicle(@RequestBody Vehicle vehicle) throws Exception {
 		service.addVehicle(vehicle);
 	}
 
 	@PutMapping
 	public void updateVehicle(@RequestBody Vehicle vehicle) {
-		addVehicle(vehicle);
+		service.updateVehicle(vehicle);
 	}
 
 	@DeleteMapping(value = "/{id}")

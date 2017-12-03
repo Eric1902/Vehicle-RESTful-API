@@ -14,7 +14,7 @@ public interface VehicleDAO {
 
 	public Vehicle getVehicleById(int id);
 
-	public void addVehicle(Vehicle vehicle);
+	public void addVehicle(Vehicle vehicle) throws Exception;
 
 	public void updateVehicle(Vehicle vehicle);
 

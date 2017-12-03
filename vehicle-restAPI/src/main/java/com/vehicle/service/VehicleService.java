@@ -11,7 +11,7 @@ import com.vehicle.model.Vehicle;
  */
 public class VehicleService {
 
-	private VehicleDAOImpl directory = VehicleDAOImpl.getInstance();
+	private VehicleDAOImpl dao = VehicleDAOImpl.getInstance();
 	
 	private VehicleService() {
 	}
@@ -25,23 +25,23 @@ public class VehicleService {
 	}
 
 	public Collection<Vehicle> getAllVehicles() {
-		return directory.getAllVehicles();
+		return dao.getAllVehicles();
 	}
 
 	public Vehicle getVehicleById(int id) {
-		return directory.getVehicleById(id);
+		return dao.getVehicleById(id);
 	}
 
-	public void addVehicle(Vehicle vehicle) {
-		directory.addVehicle(vehicle);
+	public void addVehicle(Vehicle vehicle) throws Exception {
+		dao.addVehicle(vehicle);
 	}
 
 	public void updateVehicle(Vehicle vehicle) {
-		addVehicle(vehicle);
+		dao.updateVehicle(vehicle);
 	}
 
 	public void deleteVehicle(int id) {
-		directory.deleteVehicle(id);
+		dao.deleteVehicle(id);
 	}
 
 }
