@@ -11,6 +11,8 @@ import com.vehicle.model.Vehicle;
 public interface VehicleDAO {
 
 	public Collection<Vehicle> getAllVehicles();
+	
+	public Collection<Vehicle> getAllVehicles(String make, String model, int year);
 
 	public Vehicle getVehicleById(int id);
 

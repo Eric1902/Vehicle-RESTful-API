@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vehicle.model.Vehicle;
@@ -25,7 +26,18 @@ public class VehicleController {
 	private VehicleService service = VehicleService.getInstance();
 
 	@GetMapping
-	public Collection<Vehicle> getAllVehicles() {
+	public Collection<Vehicle> getAllVehicles(@RequestParam(value = "make", required = false) String make,
+			@RequestParam(value = "model", required = false) String model,
+			@RequestParam(value = "year", required = false) Integer year) {
+		
+		System.out.println("Make: "+make+" |Model: "+model+" |Year: "+year);
+		
+		if(make!=null || model!=null || year !=null)
+			if(year==null)
+				return service.getAllVehicles(make, model, 0);
+			else
+				return service.getAllVehicles(make, model, year);
+				
 		return service.getAllVehicles();
 	}
 

@@ -27,6 +27,10 @@ public class VehicleService {
 	public Collection<Vehicle> getAllVehicles() {
 		return dao.getAllVehicles();
 	}
+	
+	public Collection<Vehicle> getAllVehicles(String make, String model, int year){
+		return dao.getAllVehicles(make, model, year);
+	}
 
 	public Vehicle getVehicleById(int id) {
 		return dao.getVehicleById(id);
