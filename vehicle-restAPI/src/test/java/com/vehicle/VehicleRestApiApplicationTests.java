@@ -1,4 +1,4 @@
-package com.rest;
+package com.vehicle;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
