@@ -1,5 +1,6 @@
 package com.vehicle.dao;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,23 +37,27 @@ public class VehicleDAOImpl implements VehicleDAO {
 
 	@Override
 	public Collection<Vehicle> getAllVehicles(String make, String model, int year) {
-		Map<Integer, Vehicle> results = new ConcurrentHashMap<>();
+		Collection<Vehicle> result = new ArrayList<>();
 		Vehicle vehicle = null;
 
 		for (Integer key : directory.keySet()) {
 			vehicle = directory.get(key);
-			if (make != null) {
-				if (vehicle.getMake().equalsIgnoreCase(make))
-					results.put(vehicle.getId(), vehicle);
-			} else if (model != null) {
-				if (vehicle.getModel().equalsIgnoreCase(model))
-					results.put(vehicle.getId(), vehicle);
-			} else if (year != 0) {
-				if (vehicle.getYear() == year)
-					results.put(vehicle.getId(), vehicle);
-			}
+
+			if (meetsCriteria(vehicle, make, model, year))
+				result.add(vehicle);
 		}
-		return (Collection<Vehicle>) results.values();
+		return (Collection<Vehicle>) result;
+	}
+
+	private boolean meetsCriteria(Vehicle vehicle, String make, String model, int year) {
+		if (make != null && !vehicle.getMake().equalsIgnoreCase(make))
+			return false;
+		else if (model != null && !vehicle.getModel().equalsIgnoreCase(model))
+			return false;
+		else if (year != 0 && vehicle.getYear() != year)
+			return false;
+
+		return true;
 	}
 
 	@Override

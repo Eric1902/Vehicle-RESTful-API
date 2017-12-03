@@ -29,15 +29,13 @@ public class VehicleController {
 	public Collection<Vehicle> getAllVehicles(@RequestParam(value = "make", required = false) String make,
 			@RequestParam(value = "model", required = false) String model,
 			@RequestParam(value = "year", required = false) Integer year) {
-		
-		System.out.println("Make: "+make+" |Model: "+model+" |Year: "+year);
-		
-		if(make!=null || model!=null || year !=null)
-			if(year==null)
+
+		if (make != null || model != null || year != null)
+			if (year == null)
 				return service.getAllVehicles(make, model, 0);
 			else
 				return service.getAllVehicles(make, model, year);
-				
+
 		return service.getAllVehicles();
 	}
 
