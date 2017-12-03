@@ -18,9 +18,9 @@ public class VehicleDAOImpl implements VehicleDAO {
 		directory.put(1, new Vehicle(1, 2017, "Honda", "Accord"));
 		directory.put(2, new Vehicle(2, 2017, "Toyota", "Camry"));
 		directory.put(3, new Vehicle(3, 2017, "Tesla", "Speedster"));
-		directory.put(4, new Vehicle(1, 2015, "Honda", "Civic"));
-		directory.put(5, new Vehicle(2, 2015, "Toyota", "Prius"));
-		directory.put(6, new Vehicle(3, 2015, "Tesla", "Model3"));
+		directory.put(4, new Vehicle(4, 2015, "Honda", "Civic"));
+		directory.put(5, new Vehicle(5, 2015, "Toyota", "Prius"));
+		directory.put(6, new Vehicle(6, 2015, "Tesla", "Model3"));
 	}
 
 	private static VehicleDAOImpl instance = new VehicleDAOImpl();
