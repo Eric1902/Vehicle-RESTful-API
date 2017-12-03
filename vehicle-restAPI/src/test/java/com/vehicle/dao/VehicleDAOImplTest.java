@@ -12,7 +12,15 @@ import com.vehicle.model.Vehicle;
  */
 public class VehicleDAOImplTest {
 
-	VehicleDAOImpl dao = VehicleDAOImpl.getInstance();
+	private final VehicleDAOImpl dao = VehicleDAOImpl.getInstance();
+
+	@Test
+	public void getVehicle() throws Exception {
+		
+		Vehicle vehicle = new Vehicle(1, 2017, "Honda", "Accord");
+
+		assertEquals(dao.getVehicleById(1), vehicle);
+	}
 
 	@Test
 	public void postVehicle() throws Exception {
